@@ -20,7 +20,7 @@ async def fetch_free_horde_image(prompt: str, model_name: str) -> str:
     url = "https://aihorde.net"
     
     # Официальный анонимный бесплатный ключ, не требующий карт
-    headers = {"apikey": "0000000000"} 
+    headers = {"apikey": "ANiRu--_L-HDc2T5_7ue0g"} 
     
     payload = {
         "prompt": prompt,
