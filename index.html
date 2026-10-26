@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI NSFW Duel Arena</title>
+    <style>
+        body {
+            margin: 0; padding: 0; background-color: #e0f2fe; color: #1e293b;
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            display: flex; height: 100vh; overflow: hidden; align-items: center;
+        }
+        .ad-sidebar-zone {
+            width: 280px; height: 100%; display: flex; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box;
+        }
+        .square-ad-box {
+            width: 250px; height: 250px; background-color: #ffffff; border: 1px dashed #cbd5e1;
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; text-align: center;
+            padding: 10px; color: #94a3b8; font-size: 12px; font-weight: bold; text-transform: uppercase; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); box-sizing: border-box;
+        }
+        .main-content {
+            flex: 1; display: flex; flex-direction: column; height: 100%; padding: 25px 0; gap: 20px; box-sizing: border-box;
+        }
+        .input-bar {
+            display: flex; gap: 15px; background: #ffffff; padding: 12px; border-radius: 14px; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .prompt-input {
+            flex: 1; background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; padding: 14px 18px; border-radius: 10px; font-size: 16px; outline: none;
+        }
+        .prompt-input:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
+        .btn-generate {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #ffffff; font-weight: 700; border: none; padding: 0 40px; border-radius: 10px; cursor: pointer; font-size: 15px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+        }
+        .battle-zone { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .generator-window {
+            background: #ffffff; border: 1px solid #cbd5e1; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .window-header {
+            background: #f8fafc; padding: 12px 20px; border-bottom: 1px solid #cbd5e1; font-size: 13px; font-weight: 700; color: #64748b; text-align: center; text-transform: uppercase;
+        }
+        .image-display { flex: 1; background: #f1f5f9; padding: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        
+        /* Защищенные ИИ-фреймы */
+        iframe { width: 100%; height: 100%; border: none; min-height: 400px; }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT AD ZONE -->
+    <div class="ad-sidebar-zone">
+        <div class="square-ad-box">Square Ad<br>250 x 250</div>
+    </div>
+
+    <!-- MAIN AREA -->
+    <div class="main-content">
+        <div class="input-bar">
+            <input type="text" id="prompt" class="prompt-input" placeholder="Type your prompt here for live generation...">
+            <button class="btn-generate" onclick="generate()">GENERATE</button>
+        </div>
+
+        <div class="battle-zone">
+            <!-- Screen A -->
+            <div class="generator-window">
+                <div class="window-header">Generator A (Blind)</div>
+                <div class="image-display" id="displayA">
+                    <span style="color: #94a3b8; font-size: 14px;">Ready for blind test</span>
+                </div>
+            </div>
+
+            <!-- Screen B -->
+            <div class="generator-window">
+                <div class="window-header">Generator B (Blind)</div>
+                <div class="image-display" id="displayB">
+                    <span style="color: #94a3b8; font-size: 14px;">Ready for blind test</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT AD ZONE -->
+    <div class="ad-sidebar-zone">
+        <div class="square-ad-box">Square Ad<br>250 x 250</div>
+    </div>
+
+    <script>
+        function generate() {
+            const promptValue = document.getElementById('prompt').value;
+            if (!promptValue) return alert("Please enter a prompt!");
+
+            const encodedPrompt = encodeURIComponent(promptValue);
+            
+            // Официальные, неубиваемые ИИ-виджеты генерации, изолированные от блокировок компьютера
+            // Модели: Stable Diffusion 3.5 Large и Pixart-Sigma
+            const widgetUrlA = `https://huggingface.co{encodedPrompt}&model=stable-diffusion-3.5`;
+            const widgetUrlB = `https://huggingface.co{encodedPrompt}&model=pixart-sigma`;
+
+            // Мгновенная интеграция ИИ-потоков в окна сайта
+            document.getElementById('displayA').innerHTML = `<iframe src="https://huggingface.co" style="width:100%; height:100%; border:none;"></iframe>`;
+            document.getElementById('displayB').innerHTML = `<iframe src="https://huggingface.co" style="width:100%; height:100%; border:none;"></iframe>`;
+        }
+    </script>
+</body>
+</html>
